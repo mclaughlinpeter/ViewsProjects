@@ -12,13 +12,17 @@
             This is part of the layout
         </div>
 
-        @RenderBody()
+        @RenderSection("Body")
 
         <div class="bg-info">
             This is part of the layout
         </div>
 
-        @RenderSection("Footer")
+        @if (IsSectionDefined("Footer")){
+            @RenderSection("Footer")
+        } else {
+            <h4>This is the default footer</h4>
+        }
 
         <div class="bg-info">
             This is part of the layout

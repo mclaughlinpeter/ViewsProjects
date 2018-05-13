@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using Views.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Views
 {
@@ -16,9 +17,10 @@ namespace Views
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            // services.Configure<MvcViewOptions>(options => {
-            //     options.ViewEngines.Insert(0, new DebugDataViewEngine());
-            // });
+            services.Configure<RazorViewEngineOptions>(options => {
+                options.ViewLocationExpanders.Add(new SimpleExpander());
+                options.ViewLocationExpanders.Add(new ColorExpander());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
